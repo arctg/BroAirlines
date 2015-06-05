@@ -40,6 +40,28 @@ public class MDAOAirplane implements IDAOAirplane {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        } finally {
+            if (resultSet!=null){
+                try{
+                    resultSet.close();
+                }catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (statement!=null){
+                try {
+                    statement.close();
+                }catch (SQLException e){
+                    System.out.println(e);
+                }
+            }
+            if (connection!=null){
+                try {
+                    connection.close();
+                }catch (SQLException e){
+                    System.out.println(e);
+                }
+            }
         }
         return airplane ;
 
@@ -75,6 +97,28 @@ public class MDAOAirplane implements IDAOAirplane {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }finally {
+            if (resultSet!=null){
+                try {
+                    resultSet.close();
+                }catch (SQLException e){
+                    System.out.println(e);
+                }
+            }
+            if (statement!=null){
+                try{
+                    statement.close();
+                }catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            if (connection!=null){
+                try {
+                    connection.close();
+                }catch (SQLException e){
+                    System.out.println(e);
+                }
+            }
         }
         return airplaneList;
 

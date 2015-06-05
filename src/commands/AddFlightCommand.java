@@ -29,56 +29,55 @@ public class AddFlightCommand extends Command {
         Flight flight = new Flight();
         String page = null;
         Date date = new Date();
+        Date setDate = new Date();
 
 
         Command.setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
         IDAOFlight idaoFlight = daoFactory.getFlightDAO();
         try {
-            Date setDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date"));
-        }catch (ParseException ea){
-            try{
-                Date setDate = new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date"));
-                if (Integer.parseInt(request.getParameter("fromcity")) == Integer.parseInt(request.getParameter("tocity"))) {
-                    request.setAttribute("error", Message.getInstance().getProperty(Message.CITY_ERROR));
-                    page = Config.getInstance().getProperty(Config.ERROR);
-                    return page;
-                } else if (date.compareTo(setDate) >= 0) {
-                    request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
-                    page = Config.getInstance().getProperty(Config.ERROR);
-                    return page;
-                } else {
-                    try {
-                        flight.setFlightDate(new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date")));
-                    } catch (ParseException e) {
-                        System.out.println(e);
-                        try {
-                            flight.setFlightDate(new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date")));
-                        }catch (ParseException el){
-                            request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
-                            page = Config.getInstance().getProperty(Config.ERROR);
-                            return page;
-                        }
-                        request.setAttribute("error",Message.getInstance().getProperty(Message.DATE_ERROR));
-                    }
-                    flight.setFrom(Integer.parseInt(request.getParameter("fromcity")));
-                    flight.setTo(Integer.parseInt(request.getParameter("tocity")));
-                    flight.setPrice(Integer.parseInt(request.getParameter("price")) * 100);
-                    flight.setAirplanesId(Integer.parseInt(request.getParameter("airplane")));
-
-                    idaoFlight.add(flight);
-
-                    page = Config.getInstance().getProperty(Config.MAIN);
-                }
-            }catch (ParseException e){
-                request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
+            setDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date"));
+        } catch (ParseException ea) {
+            try {
+                setDate = new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date"));
+            } catch (ParseException e) {
+                System.out.println(e);
+                request.setAttribute("error", Message.getInstance().getProperty(Message.INVALID_DATE));
                 page = Config.getInstance().getProperty(Config.ERROR);
                 return page;
             }
         }
+        if (Integer.parseInt(request.getParameter("fromcity")) == Integer.parseInt(request.getParameter("tocity"))) {
+            request.setAttribute("error", Message.getInstance().getProperty(Message.CITY_ERROR));
+            page = Config.getInstance().getProperty(Config.ERROR);
+            return page;
+        } else if (date.compareTo(setDate) >= 0) {
+            request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
+            page = Config.getInstance().getProperty(Config.ERROR);
+            return page;
+        } else {
+            try {
+                flight.setFlightDate(new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date")));
+            } catch (ParseException e) {
+                System.out.println(e);
+                try {
+                    flight.setFlightDate(new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date")));
+                } catch (ParseException el) {
 
+                }
+                request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
+            }
+            flight.setFrom(Integer.parseInt(request.getParameter("fromcity")));
+            flight.setTo(Integer.parseInt(request.getParameter("tocity")));
+            flight.setPrice(Integer.parseInt(request.getParameter("price")) * 100);
+            flight.setAirplanesId(Integer.parseInt(request.getParameter("airplane")));
 
+            idaoFlight.add(flight);
 
-
+            page = Config.getInstance().getProperty(Config.MAIN);
+        }
         return page;
     }
 }
+
+
+
