@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>ct</short-name>
+    <uri>/WEB-INF/customTag</uri>
+
+    <tag>
+        <name>vendor</name>
+        <tag-class>tags.VendorNameTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>vendorName</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>free</name>
+        <tag-class>tags.FreePlacesTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>freePlaces</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>hello</name>
+        <tag-class>tags.Hello</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>email</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>adminButton</name>
+        <tag-class>tags.AdminPanelButton</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>admin</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>price</name>
+        <tag-class>tags.AdditionPrice</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>addPrice</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

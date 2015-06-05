@@ -1,0 +1,87 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: dennis
+  Date: 26.05.2015
+  Time: 16:49
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/jstl/mytags.tld" prefix="mytag" %>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script language="JavaScript" src="js/calendar/tcal.js"></script>
+    <link rel="stylesheet" href="js/calendar/tcal.css">
+    <title>Admin panel</title>
+</head>
+<body>
+<div id="header">
+    <div id="hello">Hello, <mytag:hello email="${sessionScope.client.getEmail()}"/></div>
+    <h3 id="title">BroAirlines</h3>
+
+    <div id="realheader">
+        <div id="line">
+            <form name="registerForm" method="POST" action="Controller" id="form">
+                <input type="hidden" name="command" value="logout" s/>
+                <input name="submit" type="submit" value="Logout" id="link"/>
+            </form>
+        </div>
+        <div id="line">
+            <form name="registerForm" method="POST" action="Controller" id="form">
+                <input type="hidden" name="command" value="gotocabinet"/>
+                <input type="submit" value="Cabinet" id="link">
+            </form>
+        </div>
+        <div id="line">
+            <form name="registerForm" method="POST" action="Controller" id="form">
+                <input type="hidden" name="command" value="gotomain"/>
+                <input name="submit" type="submit" value="Main" id="link"/>
+            </form>
+        </div>
+        <div id="line">
+            <form name="registerForm" method="POST" action="Controller" id="form">
+                <input type="hidden" name="command" value="gotoadminpanel" s/>
+                <input name="submit" type="submit" value="Admin panel" id="link"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div id="content1">
+        <div align="center" id="centre">
+            <form name="addflight" method="POST" action="Controller">
+                <input type="hidden" name="command" value="addflight"/>
+                Vendor name: seats<br/>
+                <select name="airplane" id="input">
+                <c:forEach var="item" items="${airplane}">
+                    <option  value="${item.id}" ${item.vendorName == selectedDept ? 'selected="selected"' : ''}>${item.vendorName}: ${item.numOfSeats}</option>
+                </c:forEach>
+                </select><br/>
+                From<br/>
+                <select name="fromcity" id="input">
+                    <c:forEach var="item" items="${city}">
+                        <option  value="${item.id}" ${item.getcName() == selectedDept ? 'selected="selected"' : ''}>${item.getcName()}</option>
+                    </c:forEach>
+                </select><br/>
+                Date<br/>
+                <input  name="date" class="tcal" style="border: dotted 1px; border-radius: 3px"  value="" size="16" maxlength="16" required ><br/>
+                To<br/>
+                <select name="tocity" id="input">
+                    <c:forEach var="item" items="${city}">
+                        <option value="${item.id    }" ${item.getcName() == selectedDept ? 'selected="selected"' : ''}>${item.getcName()}</option>
+                    </c:forEach>
+                </select><br/>
+                Flight cost<br/>
+                <input  name="price" id="input" type="number" min="0" value="" size="6" maxlength="6" required><br/>
+                <input type="submit" value="Add flight" id="link">
+            </form>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <div id="realfooter"> BroAirlines. By Dennis Kryachko. 2015. EPAM</div>
+</div>
+
+</body>
+</html>

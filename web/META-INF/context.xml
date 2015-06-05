@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/BroAirlines"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxActive="5000"
+              maxIdle="10"
+              maxWait="10000"
+              removeAbandoned="true"
+              removeAbandonedTimeout="60"
+              logAbandoned="true"
+              username="root"
+              password="spartak"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://192.168.0.204:3306/broairlines?useUnicode=yes&amp;characterEncoding=UTF-8"/>
+</Context>
