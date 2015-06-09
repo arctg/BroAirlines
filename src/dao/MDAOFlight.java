@@ -7,6 +7,8 @@ package dao;
 
 import entity.Flight;
 import logic.CurrentDate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.List;
  * @author dennis
  */
 public class MDAOFlight implements IDAOFlight {
+    private static final Logger log = LogManager.getLogger(MDAOFlight.class);
     @Override
     public Flight findFlight(Flight flight) {
         return null;
@@ -45,6 +48,7 @@ public class MDAOFlight implements IDAOFlight {
             statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
+            log.warn(e);
             //return -1;
         } finally {
             if (statement != null) {
@@ -52,6 +56,7 @@ public class MDAOFlight implements IDAOFlight {
                     statement.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close statement");
+                    log.warn(e);
                 }
             }
             if (connection != null) {
@@ -59,6 +64,7 @@ public class MDAOFlight implements IDAOFlight {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close connection");
+                    log.warn(e);
                 }
             }
         }
@@ -123,6 +129,7 @@ public class MDAOFlight implements IDAOFlight {
 
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e + "returning empty array list");
             return new ArrayList<>();
         } finally {
             if (connection != null) {
@@ -130,7 +137,9 @@ public class MDAOFlight implements IDAOFlight {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e + "returning empty array list");
                     return new ArrayList<>();
+
                 }
             }
         }
@@ -161,6 +170,7 @@ public class MDAOFlight implements IDAOFlight {
 
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
             return 0;
         } finally {
             if (connection != null) {
@@ -168,6 +178,7 @@ public class MDAOFlight implements IDAOFlight {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                     return 0;
                 }
             }
@@ -201,21 +212,25 @@ public class MDAOFlight implements IDAOFlight {
                     } catch (SQLException e) {
                         e.printStackTrace();
                         System.out.println(e);
+                        log.warn(e);
                     } finally {
                         if (resultSet != null) resultSet.close();
                     }
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 } finally {
                     if (statement != null) statement.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e);
+                log.warn(e);
             } finally {
                 if (connection != null) connection.close();
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return null;
     }

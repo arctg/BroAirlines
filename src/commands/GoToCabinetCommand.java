@@ -62,7 +62,7 @@ public class GoToCabinetCommand extends Command {
 //        System.out.println("Size of trueList: " + trueOrderList.size());
 //        System.out.println("Size of nearTrueList: " + nearTrueList.size());
 //        System.out.println("Size of falseList " + falseOrderList.size());
-        System.out.println(request.getLocale());
+//        System.out.println(request.getLocale());
         request.setAttribute("trueOrderList", trueOrderList);
         request.setAttribute("nearTrueOrderList",nearTrueList);
         request.setAttribute("falseOrderList",falseOrderList);

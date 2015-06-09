@@ -2,18 +2,20 @@ package tags;
 
 import dao.*;
 import entity.Airplane;
-import entity.City;
 import entity.Flight;
 import entity.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.net.Inet4Address;
 
 /**
  * Created by dennis on 07.06.2015.
  */
-public class VendorNameByFlight extends TagSupport {
+public class VendorNameByFlightTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(VendorNameByFlightTag.class);
+
     private String vendorname;
     int id;
     Airplane airplane = null;
@@ -43,6 +45,7 @@ public class VendorNameByFlight extends TagSupport {
             pageContext.getOut().write(vendorname);
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

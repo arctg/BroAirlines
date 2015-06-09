@@ -5,6 +5,8 @@ import dao.IDAOAirplane;
 import dao.IDAOFlight;
 import entity.Airplane;
 import entity.Flight;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.io.IOException;
  * Created by dennis on 03.06.2015.
  */
 public class FreePlacesTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(FreePlacesTag.class);
     private String freePlaces;
     static DAOFactory daoFactory;
     Airplane airplane = null;
@@ -30,7 +33,6 @@ public class FreePlacesTag extends TagSupport {
         flight = idaoFlight.findById(id);
 
         this.freePlaces = Integer.toString(idaoAirplane.findAirplaneById(flight.getAirplanesId()).getNumOfSeats() - numOfBusySeats);
-
     }
 
     public int doStartTag() {
@@ -38,6 +40,7 @@ public class FreePlacesTag extends TagSupport {
             pageContext.getOut().write(freePlaces);
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

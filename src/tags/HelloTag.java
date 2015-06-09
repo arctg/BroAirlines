@@ -3,6 +3,8 @@ package tags;
 import dao.DAOFactory;
 import dao.IDAOClient;
 import entity.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import javax.servlet.jsp.tagext.TagSupport;
@@ -11,7 +13,8 @@ import java.io.IOException;
 /**
  * Created by dennis on 03.06.2015.
  */
-public class Hello extends TagSupport {
+public class HelloTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(HelloTag.class);
     private String email;
     private boolean isAdmin;
     Client client = null;
@@ -40,6 +43,7 @@ public class Hello extends TagSupport {
 
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

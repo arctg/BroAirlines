@@ -6,6 +6,8 @@ import dao.IDAOCity;
 import dao.IDAOFlight;
 import entity.City;
 import entity.Flight;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.util.StringTokenizer;
  * Created by dennis on 07.06.2015.
  */
 public class DirectionTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(DirectionTag.class);
     private String direction;
     City city = null;
     Flight flight = null;
@@ -40,6 +43,7 @@ public class DirectionTag extends TagSupport {
             pageContext.getOut().write(direction);
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

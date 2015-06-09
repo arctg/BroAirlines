@@ -29,7 +29,7 @@ public class PriceFixer {
         final double BASE_COEFICIENT = 0.25;
         int priceCoeficient = 0;
         double dateCoeficient, placeCoeficient;
-        try {
+
             //Date currentDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse("2015-06-22 00:00");
             //Date currentDate = new Date();
             Date currentDate = CurrentDate.getCurrentDate();
@@ -46,9 +46,6 @@ public class PriceFixer {
             priceCoeficient = (int) (dateCoeficient + placeCoeficient);
             //System.out.println("new price is" + priceCoeficient);
 
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     return priceCoeficient;
     }
 

@@ -7,10 +7,14 @@ package tags;
 import dao.DAOFactory;
 import dao.IDAOAirplane;
 import entity.Airplane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class VendorNameTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(VendorNameTag.class);
     private String vendorName;
     Airplane airplane = null;
     static DAOFactory daoFactory;
@@ -33,6 +37,7 @@ public class VendorNameTag extends TagSupport {
             pageContext.getOut().write(vendorName);
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

@@ -6,6 +6,8 @@ import dao.IDAOFlight;
 import entity.Airplane;
 import entity.Flight;
 import logic.PriceFixer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -13,7 +15,8 @@ import java.io.IOException;
 /**
  * Created by dennis on 04.06.2015.
  */
-public class AdditionPrice extends TagSupport {
+public class AdditionPriceTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(AdditionPriceTag.class);
     private String addPrice;
     static DAOFactory daoFactory;
     Airplane airplane = null;
@@ -47,6 +50,7 @@ public class AdditionPrice extends TagSupport {
             pageContext.getOut().write("~" + addPrice);
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }

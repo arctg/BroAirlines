@@ -6,6 +6,8 @@
 package dao;
 
 import entity.Region;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +20,7 @@ import java.util.List;
  * @author dennis
  */
 public class MDAORegion implements IDAORegion {
+    private static final Logger log = LogManager.getLogger(MDAOOrder.class);
     @Override
     public List<Region> getAll() {
         Connection connection = null;
@@ -47,12 +50,14 @@ public class MDAORegion implements IDAORegion {
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
         }

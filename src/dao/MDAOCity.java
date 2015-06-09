@@ -6,6 +6,8 @@
 package dao;
 
 import entity.City;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +20,7 @@ import java.util.List;
  * @author dennis
  */
 public class MDAOCity implements IDAOCity {
+    private static final Logger log = LogManager.getLogger(MDAOCity.class);
     @Override
     public List<City> getAll() {
         Connection connection = null;
@@ -45,12 +48,14 @@ public class MDAOCity implements IDAOCity {
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
         }
@@ -79,21 +84,25 @@ public class MDAOCity implements IDAOCity {
                     } catch (SQLException e) {
                         e.printStackTrace();
                         System.out.println(e);
+                        log.warn(e);
                     } finally {
                         if (resultSet != null) resultSet.close();
                     }
                 } catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 } finally {
                     if (statement != null) statement.close();
                 }
             } catch (SQLException e) {
                 System.out.println(e);
+                log.warn(e);
             } finally {
                 if (connection != null) connection.close();
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return null;
     }

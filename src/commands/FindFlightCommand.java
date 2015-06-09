@@ -10,6 +10,8 @@ import entity.Flight;
 import logic.CurrentDate;
 import manager.Config;
 import manager.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,8 @@ import java.util.List;
  * Created by dennis on 01.06.2015.
  */
 public class FindFlightCommand extends Command {
+    private static final Logger log = LogManager.getLogger(FindFlightCommand.class);
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -48,6 +52,7 @@ public class FindFlightCommand extends Command {
             );
         }catch (ParseException e){
             System.out.println(e);
+            log.warn(e);
             try {
                 flightList = idaoFlight.findFlights(
                         new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("begindate")),
@@ -56,7 +61,8 @@ public class FindFlightCommand extends Command {
                         Integer.parseInt(request.getParameter("tocity")));
             }catch (ParseException e2){
                 System.out.println(e2);
-                //request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
+                request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
+                log.warn(e2);
                 page = Config.getInstance().getProperty(Config.ERROR);
                 return page;
             }
@@ -71,13 +77,13 @@ public class FindFlightCommand extends Command {
                 flightList.remove(i);
             }
 
-            System.out.println(idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()).getVendorName());
-            System.out.println(flightList.get(i).getCreTime());
-            System.out.println(flightList.get(i).getFlightDate());
-            System.out.println(idaoCity.findById(flightList.get(i).getFrom()).getcName());
-            System.out.println(idaoCity.findById(flightList.get(i).getTo()).getcName());
-            System.out.println(flightList.get(i).getPrice());
-            System.out.println(idaoFlight.busyPlaces(flightList.get(i).getAirplanesId()));
+//            System.out.println(idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()).getVendorName());
+//            System.out.println(flightList.get(i).getCreTime());
+//            System.out.println(flightList.get(i).getFlightDate());
+//            System.out.println(idaoCity.findById(flightList.get(i).getFrom()).getcName());
+//            System.out.println(idaoCity.findById(flightList.get(i).getTo()).getcName());
+//            System.out.println(flightList.get(i).getPrice());
+//            System.out.println(idaoFlight.busyPlaces(flightList.get(i).getAirplanesId()));
             Airplane airplane = null;
 //            System.out.println("Fuck!" + idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()));
 //            airplane = idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId());

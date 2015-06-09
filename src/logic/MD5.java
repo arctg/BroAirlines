@@ -3,10 +3,14 @@ package logic;
 /**
  * Created by dennis on 24.05.2015.
  */
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
+    private static final Logger log = LogManager.getLogger(MD5.class);
 
 
     public static String getHash(String str) {
@@ -25,6 +29,7 @@ public class MD5 {
             }
         }
         catch (NoSuchAlgorithmException e) {
+            log.warn(e);
             return e.toString();
         }
 

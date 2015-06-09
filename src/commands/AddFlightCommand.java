@@ -43,21 +43,24 @@ public class AddFlightCommand extends Command {
         try {
             setDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date"));
         } catch (ParseException ea) {
+            log.warn(ea);
             try {
                 setDate = new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date"));
             } catch (ParseException e) {
                 System.out.println(e);
-                //request.setAttribute("error", Message.getInstance().getProperty(Message.INVALID_DATE));
+                log.warn(e);
+                request.setAttribute("error", Message.getInstance().getProperty(Message.INVALID_DATE));
                 page = Config.getInstance().getProperty(Config.ERROR);
                 return page;
             }
         }
         if (Integer.parseInt(request.getParameter("fromcity")) == Integer.parseInt(request.getParameter("tocity"))) {
-            //request.setAttribute("error", Message.getInstance().getProperty(Message.CITY_ERROR));
+            request.setAttribute("error", Message.getInstance().getProperty(Message.CITY_ERROR));
+            log.warn("fromCity==toCity");
             page = Config.getInstance().getProperty(Config.ERROR);
             return page;
         } else if (date.compareTo(setDate) >= 0) {
-            //request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
+            request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
             page = Config.getInstance().getProperty(Config.ERROR);
             return page;
         } else {
@@ -65,11 +68,11 @@ public class AddFlightCommand extends Command {
                 flight.setFlightDate(new SimpleDateFormat("yy-MM-dd HH:mm").parse(request.getParameter("date")));
             } catch (ParseException e) {
                 System.out.println(e);
-                log.debug("flight addeded");
+                log.warn(e);
                 try {
                     flight.setFlightDate(new SimpleDateFormat("yy-MM-dd").parse(request.getParameter("date")));
                 } catch (ParseException el) {
-
+                    log.warn(el);
                 }
                 //request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
             }
@@ -80,7 +83,8 @@ public class AddFlightCommand extends Command {
             flight.setAirplanesId(Integer.parseInt(request.getParameter("airplane")));
 
             idaoFlight.add(flight);
-            log.info("flight addeded");
+            log.info("Flight addeded");
+            log.info("redirecting to main");
 
             page = Config.getInstance().getProperty(Config.MAIN);
         }

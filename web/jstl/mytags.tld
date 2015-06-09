@@ -30,7 +30,7 @@
 
     <tag>
         <name>hello</name>
-        <tag-class>tags.Hello</tag-class>
+        <tag-class>tags.HelloTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>email</name>
@@ -52,7 +52,7 @@
 
     <tag>
         <name>price</name>
-        <tag-class>tags.AdditionPrice</tag-class>
+        <tag-class>tags.AdditionPriceTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>addPrice</name>
@@ -63,7 +63,7 @@
 
     <tag>
         <name>todayis</name>
-        <tag-class>tags.TodayIs</tag-class>
+        <tag-class>tags.TodayIsTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -80,7 +80,7 @@
 
     <tag>
         <name>onetoyes</name>
-        <tag-class>tags.OneToYes</tag-class>
+        <tag-class>tags.OneToYesTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>one</name>
@@ -91,7 +91,7 @@
 
     <tag>
         <name>vendorbyflight</name>
-        <tag-class>tags.VendorNameByFlight</tag-class>
+        <tag-class>tags.VendorNameByFlightTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>flightId</name>
@@ -102,7 +102,7 @@
 
     <tag>
         <name>flightDateByFlightId</name>
-        <tag-class>tags.FlightDateByFlight</tag-class>
+        <tag-class>tags.FlightDateByFlightTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>flightId</name>

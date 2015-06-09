@@ -11,12 +11,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import entity.Client;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author dennis
  */
 public class MDAOClient implements IDAOClient {
-
+    private static final Logger log = LogManager.getLogger(MDAOClient.class);
     public int create(Client client) {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -36,6 +38,7 @@ public class MDAOClient implements IDAOClient {
             return statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
+            log.warn(e);
             return -1;
         } finally {
             if (statement != null) {
@@ -43,6 +46,7 @@ public class MDAOClient implements IDAOClient {
                     statement.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close statement");
+                    log.warn(e);
                 }
             }
             if (connection != null) {
@@ -50,6 +54,7 @@ public class MDAOClient implements IDAOClient {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close connection");
+                    log.warn(e);
                 }
             }
         }

@@ -10,6 +10,7 @@ import java.io.IOException;
 /**
  * Created by dennis on 03.06.2015.
  */
+@Deprecated
 public class AdminPanelButton extends TagSupport {
     private boolean admin;
     private boolean isAdmin;

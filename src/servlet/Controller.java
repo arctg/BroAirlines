@@ -2,6 +2,8 @@ package servlet;
 
 import commands.Command;
 import manager.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ import javax.servlet.RequestDispatcher;
  */
 //@WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
+    private static final Logger log = LogManager.getLogger(Controller.class);
 
     ControllerHelper controllerHelper = ControllerHelper.getInstance();
 
@@ -37,6 +40,7 @@ public class Controller extends HttpServlet {
             //request.setAttribute("locale",request.getLocale());
         }catch (UnsupportedEncodingException e){
             System.out.println(e);
+            log.warn(e);
         }
 
         try {
@@ -46,11 +50,13 @@ public class Controller extends HttpServlet {
             System.out.println(page);
         } catch (ServletException e){
             e.printStackTrace();
-            //request.setAttribute("messageError", Message.getInstance().getProperty(Message.SERVLET_EXCEPTION));
+            request.setAttribute("error", Message.getInstance().getProperty(Message.SERVLET_EXCEPTION));
+            log.warn(e);
         }
          catch (IOException e) {
              e.printStackTrace();
-             //request.setAttribute("messageError", Message.getInstance().getProperty(Message.IO_EXCEPTION));
+             request.setAttribute("error", Message.getInstance().getProperty(Message.IO_EXCEPTION));
+             log.warn(e);
          }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);

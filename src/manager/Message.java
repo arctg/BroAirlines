@@ -22,10 +22,10 @@ public class Message {
     public static final String login = "login";
 
 
-    public static Message getInstance(Locale curLoc){
+    public static Message getInstance(){
         if (instance ==null ) {
             instance = new Message();
-            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME, curLoc);
+            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME);
         }
         return instance;
     }

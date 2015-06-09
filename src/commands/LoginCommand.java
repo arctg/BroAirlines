@@ -53,8 +53,8 @@ public class LoginCommand extends Command {
         }
 
         else {
-            //System.out.println(Message.getInstance(request.getLocale()).getProperty(Message.LOGIN_ERROR));
-            request.setAttribute("error", Message.getInstance(locale).getProperty(Message.LOGIN_ERROR));
+            System.out.println(Message.getInstance().getProperty(Message.LOGIN_ERROR));
+            request.setAttribute("error", Message.getInstance().getProperty(Message.LOGIN_ERROR));
             page = Config.getInstance().getProperty(Config.ERROR);
             logger.debug("no such client found");
         }

@@ -11,7 +11,6 @@ import dao.DAOFactory;
 public abstract class Command {
     protected static DAOFactory daoFactory;
 
-
     public abstract String execute(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException,IOException;
 

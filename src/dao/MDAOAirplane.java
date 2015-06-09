@@ -7,6 +7,8 @@ package dao;
 
 import entity.Airplane;
 import entity.Airplane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +22,7 @@ import java.util.List;
  * @author dennis
  */
 public class MDAOAirplane implements IDAOAirplane {
+    private static final Logger log = LogManager.getLogger(MDAOAirplane.class);
     @Override
     public Airplane findAirplaneById(int id) {
         Connection connection = null;
@@ -40,12 +43,15 @@ public class MDAOAirplane implements IDAOAirplane {
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
+
         } finally {
             if (resultSet!=null){
                 try{
                     resultSet.close();
                 }catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
             if (statement!=null){
@@ -53,6 +59,7 @@ public class MDAOAirplane implements IDAOAirplane {
                     statement.close();
                 }catch (SQLException e){
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
             if (connection!=null){
@@ -60,6 +67,7 @@ public class MDAOAirplane implements IDAOAirplane {
                     connection.close();
                 }catch (SQLException e){
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
         }
@@ -97,12 +105,14 @@ public class MDAOAirplane implements IDAOAirplane {
             }
         } catch (SQLException e) {
             System.out.println(e);
+            log.warn(e);
         }finally {
             if (resultSet!=null){
                 try {
                     resultSet.close();
                 }catch (SQLException e){
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
             if (statement!=null){
@@ -110,6 +120,7 @@ public class MDAOAirplane implements IDAOAirplane {
                     statement.close();
                 }catch (SQLException e) {
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
             if (connection!=null){
@@ -117,6 +128,7 @@ public class MDAOAirplane implements IDAOAirplane {
                     connection.close();
                 }catch (SQLException e){
                     System.out.println(e);
+                    log.warn(e);
                 }
             }
         }

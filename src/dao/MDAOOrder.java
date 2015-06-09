@@ -6,6 +6,8 @@
 package dao;
 
 import entity.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import java.util.List;
  * @author dennis
  */
 public class MDAOOrder implements IDAOOrder {
+    private static final Logger log = LogManager.getLogger(MDAOOrder.class);
+
     @Override
     public void update(Order order) {}
 
@@ -29,9 +33,11 @@ public class MDAOOrder implements IDAOOrder {
                 statement.executeUpdate();
             }catch (SQLException e){
                 System.out.println(e);
+                log.warn(e);
             }
         }catch (SQLException e){
             System.out.println(e);
+            log.warn(e);
         }
     }
 
@@ -55,12 +61,14 @@ public class MDAOOrder implements IDAOOrder {
             statement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
+            log.warn(e);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close statement");
+                    log.warn(e);
                 }
             }
             if (connection != null) {
@@ -68,6 +76,7 @@ public class MDAOOrder implements IDAOOrder {
                     connection.close();
                 } catch (SQLException e) {
                     System.out.println("MySQLClientDAO.create() can't close connection");
+                    log.warn(e);
                 }
             }
         }
@@ -96,9 +105,11 @@ public class MDAOOrder implements IDAOOrder {
                 return orderList;
             }catch (SQLException e){
                 System.out.println(e);
+                log.warn(e);
             }
         }catch (SQLException e){
             System.out.println(e);
+            log.warn(e);
         }
         return null;
     }

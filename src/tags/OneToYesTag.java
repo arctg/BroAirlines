@@ -1,10 +1,7 @@
 package tags;
 
-import dao.DAOFactory;
-import dao.IDAOCity;
-import dao.IDAOFlight;
-import entity.City;
-import entity.Flight;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
@@ -12,7 +9,8 @@ import java.io.IOException;
 /**
  * Created by dennis on 07.06.2015.
  */
-public class OneToYes extends TagSupport {
+public class OneToYesTag extends TagSupport {
+    private static final Logger log = LogManager.getLogger(OneToYesTag.class);
     private String one;
 
     public void setOne(String one) {
@@ -26,6 +24,7 @@ public class OneToYes extends TagSupport {
 
         } catch (IOException e) {
             System.out.println(e);
+            log.warn(e);
         }
         return SKIP_BODY;
     }
