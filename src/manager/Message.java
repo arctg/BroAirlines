@@ -1,4 +1,6 @@
 package manager;
+import javax.servlet.http.HttpServlet;
+import java.util.Locale;
 import java.util.ResourceBundle;
 /**
  * Created by dennis on 24.05.2015.
@@ -17,11 +19,13 @@ public class Message {
     public static final String DATE_ERROR = "DATE_ERROR";
     public static final String CITY_ERROR = "CITY_ERROR";
     public static final String INVALID_DATE = "INVALID_DATE";
+    public static final String login = "login";
 
-    public static Message getInstance(){
+
+    public static Message getInstance(Locale curLoc){
         if (instance ==null ) {
             instance = new Message();
-            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME);
+            instance.resource = ResourceBundle.getBundle(BUNDLE_NAME, curLoc);
         }
         return instance;
     }

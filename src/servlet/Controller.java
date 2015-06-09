@@ -33,6 +33,8 @@ public class Controller extends HttpServlet {
         try{
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
+
+            //request.setAttribute("locale",request.getLocale());
         }catch (UnsupportedEncodingException e){
             System.out.println(e);
         }
@@ -44,11 +46,11 @@ public class Controller extends HttpServlet {
             System.out.println(page);
         } catch (ServletException e){
             e.printStackTrace();
-            request.setAttribute("messageError", Message.getInstance().getProperty(Message.SERVLET_EXCEPTION));
+            //request.setAttribute("messageError", Message.getInstance().getProperty(Message.SERVLET_EXCEPTION));
         }
          catch (IOException e) {
              e.printStackTrace();
-             request.setAttribute("messageError", Message.getInstance().getProperty(Message.IO_EXCEPTION));
+             //request.setAttribute("messageError", Message.getInstance().getProperty(Message.IO_EXCEPTION));
          }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
         dispatcher.forward(request, response);

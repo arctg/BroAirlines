@@ -8,37 +8,56 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="/jstl/mytags.tld" prefix="mytag" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setBundle basename="manager.messages"/>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script language="JavaScript" src="js/calendar/tcal.js"></script>
     <link rel="stylesheet" href="js/calendar/tcal.css">
-    <title>Result</title>
+    <title><fmt:message key="book.title"/></title>
+    <script type="text/javascript">
+        function noBack(){window.history.forward();}
+        noBack();
+        window.onload=noBack;
+        window.onpageshow=function(evt){if(evt.persisted)noBack();}
+        window.onunload=function(){void(0);}
+    </script>
+</head>
 <body>
 <div id="header">
-    <div id="hello">Hello, <mytag:hello email="${sessionScope.client.getEmail()}"/></div>
+    <div id="hello"><fmt:message key="hello"/>, <mytag:hello email="${sessionScope.client.getEmail()}"/></div>
+    <div id="hello"><fmt:message key="todayis"/>: <mytag:todayis/></div>
     <h3 id="title">BroAirlines</h3>
 
     <div id="realheader">
         <div id="line">
             <form name="registerForm" method="POST" action="Controller" id="form">
                 <input type="hidden" name="command" value="logout" s/>
-                <input name="submit" type="submit" value="Logout" id="link"/>
+                <input name="submit" type="submit" value="<fmt:message key="Logout"/>" id="link"/>
             </form>
         </div>
         <div id="line">
             <form name="registerForm" method="POST" action="Controller" id="form">
                 <input type="hidden" name="command" value="gotocabinet"/>
-                <input type="submit" value="Cabinet" id="link">
+                <input type="submit" value="<fmt:message key="Cabinet"/>" id="link">
             </form>
         </div>
         <div id="line">
             <form name="registerForm" method="POST" action="Controller" id="form">
                 <input type="hidden" name="command" value="gotomain"/>
-                <input name="submit" type="submit" value="Main" id="link"/>
+                <input name="submit" type="submit" value="<fmt:message key="Main"/>" id="link"/>
             </form>
         </div>
-        <mytag:adminButton admin="${sessionScope.client.admin}"/>
+        <c:if test="${sessionScope.client.admin}">
+        <div id="line">
+            <form name="registerForm" method="POST" action="Controller" id="form">
+                <input type="hidden" name="command" value="gotoadminpanel" s/>
+                <input name="submit" type="submit" value="<fmt:message key="AdminPanel"/>" id="link"/>
+            </form>
+        </div>
+        </c:if>
+
     </div>
 </div>
 <div id="content">
@@ -60,35 +79,35 @@
                 <div id="flightHeader"></div>
                 <div>
                     <div class="box">
-                        <div>Flight id:</div>
+                        <div><fmt:message key="flightid"/>:</div>
                         <div id="values">${item.id}</div>
                     </div>
                     <div class="box">
-                        <div>Direction:</div>
+                        <div><fmt:message key="direction"/>:</div>
                         <div id="values">${from} - ${to}</div>
                     </div>
                     <div class="box">
-                        <div>Flight date:</div>
+                        <div><fmt:message key="flightdate"/>:</div>
                         <div id="values">${item.flightDate}</div>
                     </div>
                     <div class="box">
-                        <div>Place:</div>
+                        <div><fmt:message key="place"/>:</div>
                         <div id="values"><mytag:free freePlaces="${item.id}"/></div>
                     </div>
                     <div class="box">
-                        <div>Airplane:</div>
+                        <div><fmt:message key="airplane"/>:</div>
                         <div id="values"><mytag:vendor vendorName="${item.airplanesId}"/></div>
                     </div>
                     <div class="box">
-                        <div>Additional services:</div>
+                        <div><fmt:message key="additionalservices"/>:</div>
                         <div id="values">${priboarding/100} + ${baggage/100}</div>
                     </div>
                     <div class="box">
-                        <div>Price:</div>
+                        <div><fmt:message key="price"/>:</div>
                         <div id="values">${item.price/100} + ${newprice/100}</div>
                     </div>
                     <div class="box">
-                        <div>Total cost:</div>
+                        <div><fmt:message key="totalcost"/>:</div>
                         <div id="values">${total/100}</div>
                     </div>
 
@@ -99,7 +118,7 @@
                             <form name="registerForm" method="POST" action="Controller" id="form">
                                 <input type="hidden" name="command" value="pay"/>
                                 <input type="hidden" name="flight" value="${item}"/>
-                                <input name="submit" type="submit" value="Pay" id="link"/>
+                                <input name="submit" type="submit" value="<fmt:message key="pay"/>" id="link"/>
                             </form>
                         </div>
                     </div>
@@ -110,7 +129,7 @@
     </div>
 </div>
 <div id="footer">
-    <div id="realfooter"> BroAirlines. By Dennis Kryachko. 2015. EPAM</div>
+    <div id="realfooter"> BroAirlines. By Dennis Kryachko. 2015. &#60;epam&#62;</div>
 </div>
 </body>
 </html>

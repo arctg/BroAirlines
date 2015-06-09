@@ -15,7 +15,7 @@ public class Order {
     private int flightsId;
     private int clientsId;
     private boolean laggage;
-    private Timestamp dateTime;
+    private Date dateTime;
     private int orderPrice;
     private boolean priorityBoard;
 
@@ -35,7 +35,7 @@ public class Order {
         this.laggage = laggage;
     }
 
-    public void setDateTime(Timestamp dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -63,7 +63,7 @@ public class Order {
         return laggage;
     }
 
-    public Timestamp getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 

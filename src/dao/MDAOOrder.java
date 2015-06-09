@@ -7,10 +7,8 @@ package dao;
 
 import entity.Order;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +19,21 @@ public class MDAOOrder implements IDAOOrder {
     public void update(Order order) {}
 
     @Override
-    public void delete(Order order) {}
+    public void delete(int orderId) {
+        ArrayList<Order> orderList = new ArrayList<>();
+        PreparedStatement statement = null;
+        try(Connection connection = ConnectionPool.getConnection()){
+            statement = connection.prepareStatement("delete from orders where Id=?");
+            statement.setInt(1,orderId);
+            try{
+                statement.executeUpdate();
+            }catch (SQLException e){
+                System.out.println(e);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+    }
 
     @Override
     public void create(Order order) {
@@ -63,7 +75,31 @@ public class MDAOOrder implements IDAOOrder {
     }
 
     @Override
-    public List<Order> getAll() {
+    public ArrayList<Order> getAllById(int clientId) {
+        ArrayList<Order> orderList = new ArrayList<>();
+        PreparedStatement statement = null;
+        try(Connection connection = ConnectionPool.getConnection()){
+            statement = connection.prepareStatement("select * from orders where clients_Id=?");
+            statement.setInt(1,clientId);
+            try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()){
+                    Order order = new Order();
+                    order.setId(resultSet.getInt("Id"));
+                    order.setFlightsId(resultSet.getInt("flights_Id"));
+                    order.setClientsId(resultSet.getInt("clients_Id"));
+                    order.setLaggage(resultSet.getBoolean("laggage"));
+                    order.setDateTime(resultSet.getTimestamp("datetime"));
+                    order.setPriorityBoard(resultSet.getBoolean("priboard"));
+                    order.setOrderPrice(resultSet.getInt("orderprice"));
+                    orderList.add(order);
+                }
+                return orderList;
+            }catch (SQLException e){
+                System.out.println(e);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
         return null;
     }
 

@@ -28,7 +28,7 @@ public class ConnectionPool {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            System.out.println("Cannot establish connection");
+            System.out.println("Cannot establish connection " + e);
             return null;
         }
     }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package dao;
+import java.util.ArrayList;
 import java.util.List;
 import entity.Order;
 
@@ -15,7 +16,7 @@ public interface IDAOOrder {
     public void create(Order order);
     public Order find(Order order);
     public void update(Order order);
-    public void delete(Order order);
-    public List<Order> getAll();
+    public void delete(int clientId);
+    public ArrayList<Order> getAllById(int clientId);
     
 }

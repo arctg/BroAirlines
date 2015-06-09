@@ -24,7 +24,7 @@ public class RegisterCommand extends Command {
         client.setlName(request.getParameter("lname"));
         client.setPassword(MD5.getHash(request.getParameter("newpasswd"))); //convert password to MD5-sum
         if(!LoginChecker.check(request.getParameter("newemail"))) {
-            request.setAttribute("error", Message.getInstance().getProperty(Message.EMAIL_ERROR));
+            //request.setAttribute("error", Message.getInstance().getProperty(Message.EMAIL_ERROR));
             return Config.getInstance().getProperty(Config.ERROR);
         }
         client.setPhone(request.getParameter("phone"));

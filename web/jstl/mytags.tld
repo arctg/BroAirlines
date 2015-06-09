@@ -61,4 +61,54 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>todayis</name>
+        <tag-class>tags.TodayIs</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
+    <tag>
+        <name>direction</name>
+        <tag-class>tags.DirectionTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>onetoyes</name>
+        <tag-class>tags.OneToYes</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>one</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>vendorbyflight</name>
+        <tag-class>tags.VendorNameByFlight</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>flightId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>flightDateByFlightId</name>
+        <tag-class>tags.FlightDateByFlight</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>flightId</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
 </taglib>

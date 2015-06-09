@@ -21,10 +21,10 @@ public class PayCommand extends Command {
         Order order = null;
         String page = null;
         Client client = null;
-        Flight flight = null;
-        boolean laggage = false;
-        boolean priboarding = false;
-        int total = 0;
+        //Flight flight = null;
+        //boolean laggage = false;
+        //boolean priboarding = false;
+        //int total = 0;
 
         client = (Client)request.getSession().getAttribute("client");
         order = (Order)request.getSession().getAttribute("order");

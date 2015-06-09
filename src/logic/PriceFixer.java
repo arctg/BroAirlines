@@ -31,7 +31,8 @@ public class PriceFixer {
         double dateCoeficient, placeCoeficient;
         try {
             //Date currentDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse("2015-06-22 00:00");
-            Date currentDate = new Date();
+            //Date currentDate = new Date();
+            Date currentDate = CurrentDate.getCurrentDate();
 
             double a = TimeUnit.DAYS.convert((currentDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
             double b = TimeUnit.DAYS.convert((flightDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
@@ -50,4 +51,7 @@ public class PriceFixer {
         }
     return priceCoeficient;
     }
+
+
+
 }

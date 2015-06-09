@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Flight;
+import logic.CurrentDate;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -80,8 +81,8 @@ public class MDAOFlight implements IDAOFlight {
         Date tmpDate = new Date();
         ArrayList<Flight> flightList = new ArrayList<Flight>();
 
-        if ((beginDate.compareTo(new Date())<=0)) beginDate = new Date();
-        if ((endDate.compareTo(new Date()))<=0) endDate = new Date();
+        if ((beginDate.compareTo(CurrentDate.getCurrentDate())<=0)) beginDate = CurrentDate.getCurrentDate();
+        if ((endDate.compareTo(CurrentDate.getCurrentDate()))<=0) endDate = CurrentDate.getCurrentDate();
         if(beginDate.compareTo(endDate)>0) {
             tmpDate = endDate;
             endDate = beginDate;

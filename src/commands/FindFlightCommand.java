@@ -7,6 +7,7 @@ import dao.IDAOFlight;
 import entity.Airplane;
 import entity.City;
 import entity.Flight;
+import logic.CurrentDate;
 import manager.Config;
 import manager.Message;
 
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,7 +56,7 @@ public class FindFlightCommand extends Command {
                         Integer.parseInt(request.getParameter("tocity")));
             }catch (ParseException e2){
                 System.out.println(e2);
-                request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
+                //request.setAttribute("error",Message.getInstance().getProperty(Message.INVALID_DATE));
                 page = Config.getInstance().getProperty(Config.ERROR);
                 return page;
             }
@@ -62,6 +64,13 @@ public class FindFlightCommand extends Command {
 
         System.out.println(flightList.size());
         for (int i=0;i<flightList.size();i++){
+            if ((flightList.get(i).getFlightDate().compareTo(CurrentDate.getCurrentDate())<=0)|
+                    (idaoFlight.busyPlaces(flightList.get(i).getId()))==
+                            idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()).getNumOfSeats()){
+                System.out.println("removed");
+                flightList.remove(i);
+            }
+
             System.out.println(idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()).getVendorName());
             System.out.println(flightList.get(i).getCreTime());
             System.out.println(flightList.get(i).getFlightDate());
@@ -73,6 +82,8 @@ public class FindFlightCommand extends Command {
 //            System.out.println("Fuck!" + idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()));
 //            airplane = idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId());
             airplaneList.add(idaoAirplane.findAirplaneById(flightList.get(i).getAirplanesId()));
+
+
         }
 
         String resBeginDate = request.getParameter("begindate");

@@ -24,10 +24,13 @@ public class ControllerFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
 
-        if (session.isNew()) {
-            System.out.println("redirecting");
+        if ((session.isNew())) {
+            System.out.println("Session is timeout, redirecting to login page");
             response.sendRedirect("/Controller");
-        } else filterChain.doFilter(request, response);
+        } else {
+            System.out.println("Everything is OK");
+            filterChain.doFilter(request, response);
+        }
 
     }
 
