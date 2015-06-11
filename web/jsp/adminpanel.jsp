@@ -15,13 +15,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script language="JavaScript" src="js/calendar/tcal.js"></script>
     <link rel="stylesheet" href="js/calendar/tcal.css">
-    <script type="text/javascript">
-        function noBack(){window.history.forward();}
-        noBack();
-        window.onload=noBack;
-        window.onpageshow=function(evt){if(evt.persisted)noBack();}
-        window.onunload=function(){void(0);}
-    </script>
     <title><fmt:message key="adminpanel.title"/></title>
 </head>
 <body>
@@ -90,7 +83,7 @@
     </div>
 </div>
 <div id="footer">
-    <div id="realfooter"> BroAirlines. By Dennis Kryachko. 2015. &#60;epam&#62; </div>
+    <div id="realfooter"> BroAirlines. <mytag:ver/> By Dennis Kryachko. 2015. &#60;epam&#62;</div>
 </div>
 
 </body>

@@ -11,10 +11,21 @@ import java.io.IOException;
 /**
  * Created by dennis on 29.05.2015.
  */
+
+
+
 public class ControllerFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
+
+
+    /**
+     * This filter checks user session.
+     * If user has no session - then this filter creates one.
+     * After that - check if sessin in new, in case of true - redirects to login page.
+     * If user has session, filter do nothing - passes to Controller.
+     */
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)

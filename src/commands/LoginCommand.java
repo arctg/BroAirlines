@@ -31,7 +31,7 @@ public class LoginCommand extends Command {
         String page = null;
         Client client = null;
         String email = request.getParameter("email");
-        String passwd = MD5.getHash(request.getParameter("passwd"));
+        String passwd = MD5.getHash(request.getParameter("passwd")); //converting newpasswd to MD5hash
         List<City> city = null;
 
         setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
@@ -49,7 +49,7 @@ public class LoginCommand extends Command {
             HttpSession session = request.getSession(true);
             session.setAttribute("client",client);
             page = Config.getInstance().getProperty(Config.MAIN);
-            logger.debug("Client logged in");
+            logger.debug("Client " + email + " logged in");
         }
 
         else {

@@ -15,19 +15,8 @@ public class AdminPanelButton extends TagSupport {
     private boolean admin;
     private boolean isAdmin;
     Client client = null;
-//    static DAOFactory daoFactory;
-//
-//    public static void setDAOFactory(DAOFactory factory) {
-//        daoFactory = factory;
-//    }
 
     public void setAdmin(boolean admin) {
-
-//        setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
-//        IDAOClient idaoClient = daoFactory.getClientDAO();
-//        client = idaoClient.findByEmail(email);
-//        isAdmin = client.isAdmin();
-
         this.admin = admin;
     }
 

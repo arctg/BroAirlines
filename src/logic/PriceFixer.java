@@ -14,6 +14,18 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by dennis on 04.06.2015.
  */
+
+/**
+ * Setting global prices for
+ * @value PRIORITY_BOARDING - Priority bording service
+ * @value BAGGAGE - baggage service
+ * and returns new Date object
+ * @see PriceFixer
+ *
+ *
+ *
+ */
+
 public class PriceFixer {
     static DAOFactory daoFactory;
     public static final int PRIORITY_BOARDING = 2000;
@@ -24,31 +36,40 @@ public class PriceFixer {
         daoFactory = factory;
     }
 
+    /**
+     * genereates price for flight bases on creation date of flight,
+     * flight date and number of free places in airplane.
+     * @param createDate - creatin date of flight
+     * @param flightDate - flight date
+     * @param numOfPlaces - number of places in airplane
+     * @param numOfBusyPlaces - number of busy places
+     * @value BASE_COEFICIENT - coeficient that gives max 25% add price for one service
+     *
+     *
+     * @see PriceFixer
+     *
+     *
+     *
+     */
 
-    public  int fixer(int flightId, Date createDate, Date flightDate, int flightPrice, int numOfPlaces, int numOfBusyPlaces) {
+    public int fixer(int flightId, Date createDate, Date flightDate, int flightPrice, int numOfPlaces, int numOfBusyPlaces) {
+        //changing price by dates
         final double BASE_COEFICIENT = 0.25;
         int priceCoeficient = 0;
         double dateCoeficient, placeCoeficient;
 
-            //Date currentDate = new SimpleDateFormat("yy-MM-dd HH:mm").parse("2015-06-22 00:00");
-            //Date currentDate = new Date();
-            Date currentDate = CurrentDate.getCurrentDate();
+        Date currentDate = CurrentDate.getCurrentDate();
 
-            double a = TimeUnit.DAYS.convert((currentDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
-            double b = TimeUnit.DAYS.convert((flightDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
-            double c = a / b;
+        double a = TimeUnit.DAYS.convert((currentDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
+        double b = TimeUnit.DAYS.convert((flightDate.getTime() - createDate.getTime()), TimeUnit.MILLISECONDS);
+        double c = a / b;
 
-            dateCoeficient = BASE_COEFICIENT * flightPrice * c;
-            //System.out.println("date coef is" + dateCoeficient);
+        dateCoeficient = BASE_COEFICIENT * flightPrice * c;
+        placeCoeficient = BASE_COEFICIENT * flightPrice * (((double) numOfBusyPlaces) / (double) numOfPlaces);
+        priceCoeficient = (int) (dateCoeficient + placeCoeficient);
 
-            placeCoeficient = BASE_COEFICIENT * flightPrice * (((double)numOfBusyPlaces) / (double)numOfPlaces);
-            //System.out.println("place coef is" + placeCoeficient);
-            priceCoeficient = (int) (dateCoeficient + placeCoeficient);
-            //System.out.println("new price is" + priceCoeficient);
-
-    return priceCoeficient;
+        return priceCoeficient;
     }
-
 
 
 }

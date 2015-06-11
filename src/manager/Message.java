@@ -20,6 +20,7 @@ public class Message {
     public static final String CITY_ERROR = "CITY_ERROR";
     public static final String INVALID_DATE = "INVALID_DATE";
     public static final String login = "login";
+    public static final String EXISTING_USER = "EXISTING_USER";
 
 
     public static Message getInstance(){

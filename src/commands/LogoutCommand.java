@@ -20,11 +20,8 @@ public class LogoutCommand extends Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = null;
 
-        request.getSession().removeAttribute("client");
-        request.getSession().invalidate();
-//        response.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-//        response.setHeader("Pragma","no-cache");
-//        response.setDateHeader("Expires", 0);
+        request.getSession().removeAttribute("client"); //removeing client from the session
+        request.getSession().invalidate(); //removing session
         log.debug("client is logged out");
 
         page = Config.getInstance().getProperty(Config.LOGIN);

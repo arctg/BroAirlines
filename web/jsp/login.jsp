@@ -12,7 +12,6 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
     <fmt:setBundle basename="manager.messages" />
     <title><fmt:message key="Login.title"/></title>
 </head>

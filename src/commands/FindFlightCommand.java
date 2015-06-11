@@ -32,6 +32,11 @@ public class FindFlightCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (request.getSession().getAttribute("client")==null){ //Checking if the user logged in
+            log.info("unauthorised login attempt detected");
+            return Config.getInstance().getProperty(Config.LOGIN);
+        }
+
         Flight flight = null;
         List<Flight> flightList = null;
         //Airplane airplane = null;

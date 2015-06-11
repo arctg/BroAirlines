@@ -15,7 +15,6 @@ public abstract class Command {
                         HttpServletResponse response) throws ServletException,IOException;
 
     public static void setDAOFactory(DAOFactory factory) {
-
         daoFactory = factory;
     }
 }

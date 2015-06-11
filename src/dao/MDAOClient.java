@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class MDAOClient implements IDAOClient {
     private static final Logger log = LogManager.getLogger(MDAOClient.class);
+
     public int create(Client client) {
         Connection connection = null;
         PreparedStatement statement = null;

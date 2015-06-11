@@ -4,6 +4,8 @@ import dao.*;
 import entity.*;
 import logic.CurrentDate;
 import manager.Config;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,53 +21,57 @@ import java.util.concurrent.TimeUnit;
  * Created by dennis on 29.05.2015.
  */
 public class GoToCabinetCommand extends Command {
+    private static final Logger log = LogManager.getLogger(GoToCabinetCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Airplane aiplane = null;
+
+        if (request.getSession().getAttribute("client") == null) { //Checking if the user logged in
+            log.info("unauthorised login attempt detected");
+            return Config.getInstance().getProperty(Config.LOGIN);
+        }
+
         Flight flight = null;
         Order order = null;
-        //City city = null;
         Client client = null;
-        ArrayList<Order> trueOrderList = null;
-        ArrayList<Order> nearTrueList = new ArrayList<>();
-        ArrayList<Order> falseOrderList = new ArrayList<>();
+
+        ArrayList<Order> trueOrderList = null; //List of orders that could be deleted
+        ArrayList<Order> nearTrueList = new ArrayList<>(); //List of orders that coldn't be deleted
+        ArrayList<Order> falseOrderList = new ArrayList<>(); //List of past orders
+
         setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
-        //IDAOAirplane idaoAirplane = daoFactory.getAirplaneDAO();
+
         IDAOFlight idaoFlight = daoFactory.getFlightDAO();
         IDAOOrder idaoOrder = daoFactory.getOrderDAO();
-        //IDAOCity idaoCity = daoFactory.getCityDAO();
+
         HttpSession session = request.getSession();
-        client = (Client)session.getAttribute("client");
+        client = (Client) session.getAttribute("client");
         trueOrderList = idaoOrder.getAllById(client.getId());
         Iterator<Order> iter = trueOrderList.iterator();
 
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             order = iter.next();
             flight = idaoFlight.findById(order.getFlightsId());
 
             if ((TimeUnit.DAYS.convert((flight.getFlightDate().getTime() -
-                    CurrentDate.getCurrentDate().getTime()),
-                    TimeUnit.MILLISECONDS)<3)&(TimeUnit.DAYS.convert((flight.getFlightDate().getTime() -
                             CurrentDate.getCurrentDate().getTime()),
-                    TimeUnit.MILLISECONDS))>0){
+                    TimeUnit.MILLISECONDS) < 3) & (TimeUnit.DAYS.convert((flight.getFlightDate().getTime() -
+                            CurrentDate.getCurrentDate().getTime()),
+                    TimeUnit.MILLISECONDS)) > 0) {
                 nearTrueList.add(order);
                 iter.remove();
             }
-            if (CurrentDate.getCurrentDate().compareTo(flight.getFlightDate())>=0){
+            if (CurrentDate.getCurrentDate().compareTo(flight.getFlightDate()) >= 0) {
                 falseOrderList.add(order);
                 System.out.println("removing");
                 iter.remove();
             }
         }
 
-//        System.out.println("Size of trueList: " + trueOrderList.size());
-//        System.out.println("Size of nearTrueList: " + nearTrueList.size());
-//        System.out.println("Size of falseList " + falseOrderList.size());
-//        System.out.println(request.getLocale());
+
         request.setAttribute("trueOrderList", trueOrderList);
-        request.setAttribute("nearTrueOrderList",nearTrueList);
-        request.setAttribute("falseOrderList",falseOrderList);
+        request.setAttribute("nearTrueOrderList", nearTrueList);
+        request.setAttribute("falseOrderList", falseOrderList);
 
         return Config.getInstance().getProperty(Config.CABINET);
     }

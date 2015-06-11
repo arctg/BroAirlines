@@ -20,19 +20,26 @@ public class RegisterCommand extends Command {
         Client client = new Client();
         String page = null;
 
+        Command.setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
+        IDAOClient idaoClient = daoFactory.getClientDAO();
+
         client.setfName(request.getParameter("fname"));
         client.setlName(request.getParameter("lname"));
         client.setPassword(MD5.getHash(request.getParameter("newpasswd"))); //convert password to MD5-sum
-        if(!LoginChecker.check(request.getParameter("newemail"))) {
+        if(!LoginChecker.check(request.getParameter("newemail"))) { //checking if email correct
             request.setAttribute("error", Message.getInstance().getProperty(Message.EMAIL_ERROR));
+            return Config.getInstance().getProperty(Config.ERROR);
+
+        } else if (idaoClient.findByEmail(request.getParameter("newemail"))!=null) {
+            request.setAttribute("error",Message.getInstance().getProperty(Message.EXISTING_USER));
             return Config.getInstance().getProperty(Config.ERROR);
         }
         client.setPhone(request.getParameter("phone"));
         client.setEmail(request.getParameter("newemail"));
 
 
-        Command.setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
-        IDAOClient idaoClient = daoFactory.getClientDAO();
+
+
         int dbClient = idaoClient.create(client);
         int result = dbClient;
         System.out.println(dbClient);

@@ -1,9 +1,11 @@
 package commands;
 
 import dao.DAOFactory;
+import dao.IDAOCity;
 import dao.IDAOFlight;
 import dao.MySQLDAOFactory;
 import entity.Airplane;
+import entity.City;
 import entity.Client;
 import entity.Flight;
 import logic.CurrentDate;
@@ -20,6 +22,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -32,10 +36,17 @@ public class AddFlightCommand extends Command {
     private static final Logger log = LogManager.getLogger(AddFlightCommand.class);
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("client")==null){ //Checking if the user logged in
+            log.info("unauthorised login attempt detected");
+            return Config.getInstance().getProperty(Config.LOGIN);
+        }
+
         Flight flight = new Flight();
         String page = null;
         Date date = CurrentDate.getCurrentDate();
         Date setDate = null;
+        List<City> cityList= null;
 
 
         Command.setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));
@@ -74,7 +85,7 @@ public class AddFlightCommand extends Command {
                 } catch (ParseException el) {
                     log.warn(el);
                 }
-                //request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
+                request.setAttribute("error", Message.getInstance().getProperty(Message.DATE_ERROR));
             }
             flight.setFrom(Integer.parseInt(request.getParameter("fromcity")));
             flight.setTo(Integer.parseInt(request.getParameter("tocity")));
@@ -85,6 +96,10 @@ public class AddFlightCommand extends Command {
             idaoFlight.add(flight);
             log.info("Flight addeded");
             log.info("redirecting to main");
+
+            IDAOCity idaoCity = daoFactory.getCityDAO();
+            cityList = idaoCity.getAll();
+            request.setAttribute("city",cityList);
 
             page = Config.getInstance().getProperty(Config.MAIN);
         }

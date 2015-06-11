@@ -25,7 +25,7 @@ public class ControllerHelper {
         commands.put("findflight", new FindFlightCommand());
         commands.put("gotobook", new GoToBookCommand());
         commands.put("pay", new PayCommand());
-        commands.put("deleterder", new DeleteOrderCommand());
+        commands.put("deleteorder", new DeleteOrderCommand());
     }
 
     public Command getCommand(HttpServletRequest request) {

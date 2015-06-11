@@ -111,4 +111,10 @@
         </attribute>
     </tag>
 
+    <tag>
+        <name>ver</name>
+        <tag-class>tags.VersionTag</tag-class>
+        <body-content>empty</body-content>
+    </tag>
+
 </taglib>

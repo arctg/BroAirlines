@@ -9,6 +9,11 @@ import org.apache.logging.log4j.Logger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
+/**
+ * returns MD5hash of password
+ */
+
 public class MD5 {
     private static final Logger log = LogManager.getLogger(MD5.class);
 

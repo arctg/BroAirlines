@@ -14,13 +14,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title><fmt:message key="cabinet.title"/></title>
-    <script type="text/javascript">
-        function noBack(){window.history.forward();}
-        noBack();
-        window.onload=noBack;
-        window.onpageshow=function(evt){if(evt.persisted)noBack();}
-        window.onunload=function(){void(0);}
-    </script>
 </head>
 <body>
 <div id="header">
@@ -107,7 +100,6 @@
                             <div id="line">
                                 <form name="registerForm" method="POST" action="Controller" id="form">
                                     <input type="hidden" name="command" value="deleteorder"/>
-                                    <input type="hidden" name="command" value="gotocabinet"/>
                                     <input type="hidden" name="orderId" value="${item.id}"/>
                                     <input name="submit" type="submit" value="<fmt:message key="cancelorder"/>" id="link"/>
                                 </form>
@@ -224,7 +216,7 @@
 </div>
 </div>
 <div id="footer">
-    <div id="realfooter"> BroAirlines. By Dennis Kryachko. 2015. &#60;epam&#62;</div>
+    <div id="realfooter"> BroAirlines. <mytag:ver/> By Dennis Kryachko. 2015. &#60;epam&#62;</div>
 </div>
 </body>
 </html>

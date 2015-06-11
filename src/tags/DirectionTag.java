@@ -16,6 +16,9 @@ import java.util.StringTokenizer;
 /**
  * Created by dennis on 07.06.2015.
  */
+
+
+
 public class DirectionTag extends TagSupport {
     private static final Logger log = LogManager.getLogger(DirectionTag.class);
     private String direction;
