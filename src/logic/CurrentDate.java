@@ -23,7 +23,7 @@ public class CurrentDate {
     public static Date getCurrentDate(){
        return new Date();
 //        try {
-//            return new SimpleDateFormat("yy-MM-dd HH:mm").parse("2015-06-18 00:00");
+//            return new SimpleDateFormat("yy-MM-dd HH:mm").parse("2015-06-22 00:00");
 //        }catch (ParseException e){
 //            System.out.println(e);
 //            return new Date();

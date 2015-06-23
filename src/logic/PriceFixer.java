@@ -39,11 +39,11 @@ public class PriceFixer {
     /**
      * genereates price for flight bases on creation date of flight,
      * flight date and number of free places in airplane.
-     * @param createDate - creatin date of flight
+     * @param createDate - creating date of flight
      * @param flightDate - flight date
      * @param numOfPlaces - number of places in airplane
      * @param numOfBusyPlaces - number of busy places
-     * @value BASE_COEFICIENT - coeficient that gives max 25% add price for one service
+     * @value BASE_COEFFICIENT - coefficient that gives max 25% add price for one service
      *
      *
      * @see PriceFixer

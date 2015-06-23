@@ -53,11 +53,11 @@ public class GoToCabinetCommand extends Command {
             order = iter.next();
             flight = idaoFlight.findById(order.getFlightsId());
 
-            if ((TimeUnit.DAYS.convert((flight.getFlightDate().getTime() -
+            if ((TimeUnit.HOURS.convert((flight.getFlightDate().getTime() -
                             CurrentDate.getCurrentDate().getTime()),
-                    TimeUnit.MILLISECONDS) < 3) & (TimeUnit.DAYS.convert((flight.getFlightDate().getTime() -
+                    TimeUnit.MILLISECONDS) <= 72) & (TimeUnit.HOURS.convert((flight.getFlightDate().getTime() -
                             CurrentDate.getCurrentDate().getTime()),
-                    TimeUnit.MILLISECONDS)) > 0) {
+                    TimeUnit.MILLISECONDS)) >= 0) {
                 nearTrueList.add(order);
                 iter.remove();
             }
