@@ -32,6 +32,7 @@ public class LoginCommand extends Command {
         Client client = null;
         String email = request.getParameter("email");
         String passwd = MD5.getHash(request.getParameter("passwd")); //converting newpasswd to MD5hash
+        System.out.println(passwd);
         List<City> city = null;
 
         setDAOFactory(DAOFactory.getDaoFactory(DAOFactory.Factories.MYSQL));

@@ -13,5 +13,5 @@
               username="root"
               password="spartak"
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://192.168.0.204:3306/broairlines?useUnicode=yes&amp;characterEncoding=UTF-8"/>
+              url="jdbc:mysql://127.0.0.1:3306/broairlines?useUnicode=yes&amp;characterEncoding=UTF-8"/>
 </Context>

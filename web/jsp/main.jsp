@@ -81,7 +81,7 @@
     </div>
 </div>
 <div id="footer">
-    <div id="realfooter"> BroAirlines. <mytag:ver/> By Dennis Kryachko. 2015. &#60;epam&#62;</div>
+    <div id="realfooter"> BroAirlines. <mytag:ver/> By Dennis Kryachko. 2015. &#60;trainee&#62;</div>
 </div>
 </body>
 </html>
